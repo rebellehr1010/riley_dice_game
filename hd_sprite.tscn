@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://uyn2eu7kf7ur"]
+
+[ext_resource type="Script" path="res://HdSprite.cs" id="1_l8kes"]
+
+[node name="HDSprite" type="Sprite2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_l8kes")

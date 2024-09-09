@@ -1,0 +1,123 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7o83ekki4or0"]
+
+[ext_resource type="Texture2D" uid="uid://dtbtq674nhiq7" path="res://dice/background.svg" id="1"]
+[ext_resource type="Script" path="res://dice/Dice.cs" id="1_rvypo"]
+[ext_resource type="PackedScene" uid="uid://uyn2eu7kf7ur" path="res://hd_sprite.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://ns2glnnkmo6s" path="res://dice/symbols.svg" id="3"]
+[ext_resource type="Script" path="res://dice/Symbol.cs" id="4_vtwp0"]
+
+[sub_resource type="Animation" id="3"]
+resource_name = "Roll"
+length = 0.33
+step = 0.003
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.126126),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"UpdateSymbol"
+}]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Symbol:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.066, -0.306, 0.066, 0.306, 0, -0.066, 0, 0.066, 0, 1, -0.066, 0.262, 0.066, -0.262),
+"times": PackedFloat32Array(0, 0.165, 0.33)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Symbol:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.066, -0.306, 0.066, 0.306, 0, -0.066, 0, 0.066, 0, 1, -0.066, 0.262, 0.066, -0.262),
+"times": PackedFloat32Array(0, 0.165, 0.33)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.099, 1.749, 0.099, -1.749, 3.142, -0.099, 2.253, 0.099, -2.253),
+"times": PackedFloat32Array(0, 0.33)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:scale:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.033, 0.22, 0.033, -0.22, 0.5, -0.066, 0, 0.066, 0, 1, -0.033, 0.384, 0.033, -0.384),
+"times": PackedFloat32Array(0, 0.165, 0.33)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:scale:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.033, 0.22, 0.033, -0.22, 0.5, -0.066, 0, 0.066, 0, 1, -0.033, 0.384, 0.033, -0.384),
+"times": PackedFloat32Array(0, 0.165, 0.33)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cky5u"]
+_data = {
+"Roll": SubResource("3")
+}
+
+[node name="Dice" type="Node2D"]
+position = Vector2(22, 22)
+script = ExtResource("1_rvypo")
+SymbolPath = NodePath("Visual/Symbol")
+SymbolAnimationPlayerPath = NodePath("Visual/AnimationPlayer")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Background" type="Node2D" parent="Visual"]
+
+[node name="HDSprite" parent="Visual/Background" instance=ExtResource("2")]
+texture = ExtResource("1")
+
+[node name="Symbol" type="Node2D" parent="Visual"]
+script = ExtResource("4_vtwp0")
+
+[node name="HDSprite" parent="Visual/Symbol" instance=ExtResource("2")]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("3")
+hframes = 10
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual"]
+libraries = {
+"": SubResource("AnimationLibrary_cky5u")
+}
+
+[node name="DiceButton" type="Button" parent="." groups=["dice_group"]]
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+focus_mode = 0
+toggle_mode = true
+
+[connection signal="toggled" from="DiceButton" to="." method="OnDiceButtonToggled"]

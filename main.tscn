@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmjnlq5arrnb2"]
+
+[ext_resource type="PackedScene" uid="uid://c7o83ekki4or0" path="res://dice/dice.tscn" id="1"]
+[ext_resource type="Script" path="res://Main.cs" id="1_chx8f"]
+[ext_resource type="PackedScene" uid="uid://q4ii1xqr0gxf" path="res://HUD.tscn" id="3_gm1ec"]
+[ext_resource type="PackedScene" uid="uid://c4tc5dygoua32" path="res://scorer.tscn" id="4_4au45"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_chx8f")
+
+[node name="Dice1" parent="." instance=ExtResource("1")]
+position = Vector2(120, 200)
+scale = Vector2(3, 3)
+
+[node name="Dice2" parent="." instance=ExtResource("1")]
+position = Vector2(240, 200)
+scale = Vector2(3, 3)
+
+[node name="Dice3" parent="." instance=ExtResource("1")]
+position = Vector2(360, 200)
+scale = Vector2(3, 3)
+
+[node name="Dice4" parent="." instance=ExtResource("1")]
+position = Vector2(120, 320)
+scale = Vector2(3, 3)
+
+[node name="Dice5" parent="." instance=ExtResource("1")]
+position = Vector2(240, 320)
+scale = Vector2(3, 3)
+
+[node name="Dice6" parent="." instance=ExtResource("1")]
+position = Vector2(360, 320)
+scale = Vector2(3, 3)
+
+[node name="HUD" parent="." instance=ExtResource("3_gm1ec")]
+
+[node name="Scorer" parent="." instance=ExtResource("4_4au45")]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4tc5dygoua32"]
+
+[ext_resource type="Script" path="res://Scorer.cs" id="1_hmp1o"]
+
+[node name="Scorer" type="Node"]
+script = ExtResource("1_hmp1o")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 30.0
+offset_right = 20.0
+offset_bottom = 85.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
